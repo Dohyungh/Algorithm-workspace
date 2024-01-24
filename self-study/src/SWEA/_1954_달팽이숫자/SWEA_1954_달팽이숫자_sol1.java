@@ -1,8 +1,8 @@
-package swea_1954_달팽이숫자;
+package SWEA._1954_달팽이숫자;
 
 import java.util.Scanner;
 
-public class Swea_1954_달팽이숫자_sol1 {
+public class SWEA_1954_달팽이숫자_sol1 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int T;

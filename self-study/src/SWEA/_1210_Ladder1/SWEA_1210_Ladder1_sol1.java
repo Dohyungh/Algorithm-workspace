@@ -1,4 +1,4 @@
-package swea_1210_Ladder1;
+package SWEA._1210_Ladder1;
 import java.util.Arrays;
 import java.util.Scanner;
 
