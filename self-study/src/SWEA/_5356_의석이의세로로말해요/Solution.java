@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
-
+//try catch?
 public class Solution {
 	public static void main(String[] args) { // 예시랑 실제랑 입력 다른 것 주의
 	
