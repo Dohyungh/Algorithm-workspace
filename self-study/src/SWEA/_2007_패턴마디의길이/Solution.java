@@ -2,7 +2,7 @@ package SWEA._2007_패턴마디의길이;
 
 import java.util.Scanner;
 
-//Hashmap을 이용할 수 없다! 왜
+//Hashmap을 이용할 수 없다! 왜??
 
 //substring 이용해서 한번 해보세요
 
