@@ -26,7 +26,7 @@ public class Solution2 {
 				for (int i =0; i<N-1; i++) {
 					if (arr[j][i] == arr[j][i+1]) {
 						new_arr[i] = 2;
-					} else { ㅡ
+					} else {
 						new_arr[i] = 1;
 					}
 				}
