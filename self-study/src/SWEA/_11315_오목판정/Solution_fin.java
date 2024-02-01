@@ -35,12 +35,13 @@ public class Solution_fin {
 			for (int i = 0; i<N; i++) {
 				count = 0; // 행 넘어가면 자동 리셋
 				int j = 0;
-				while (j<N) {
+				while (j<N) {// 2. &&!five 조건 넣어주니까 통과함. 오목의 개수가 짝수개일 때 계속 다시 뒤집으니까 문제였던 듯. 
 					if (arr[i][j] == 'o') {
 						count++;
 						if (count == 5) {
-							five = !five;
-							break;
+							five = true; // 3. 그러니까 이걸 그냥 five = true; 로 했으면 됐음. !five 가 아니라. 
+							//4. 스위치 켜고 끄는 거 같이 여러번 뒤집는 게 아니면 그냥 true나 false로 지정하자.
+							break; //1. break 가 문제였음
 						}
 						
 					} else {
@@ -58,7 +59,7 @@ public class Solution_fin {
 					if (arr[i][j] == 'o') {
 						count++;
 						if (count == 5) {
-							five = !five;
+							five = true;
 							break;
 						}
 						
@@ -75,13 +76,13 @@ public class Solution_fin {
 			int right = 0;
 			int i = 0;
 			count = 0;
-			while (i<2*N) {
+			while (i<2*N-1) {
 				count = 0;
 				for (int j =left; j<=right; j+=2) {
 					if (arr[tf_r(i,j)][tf_c(i,j)] == 'o') {
 						count++;
 						if (count == 5) {
-							five = !five;
+							five = true;
 							break;
 									
 						}
@@ -101,7 +102,8 @@ public class Solution_fin {
 				i++;
 				
 			}
-
+			
+			//대각 \ 방향
 			int top = N;
 			int bottom = N;
 			int k = -N+1;
@@ -112,7 +114,7 @@ public class Solution_fin {
 					if (arr[tf_r(l,k)][tf_c(l,k)] == 'o') {
 						count++;
 						if (count == 5) {
-							five = !five;
+							five = true;
 							break;
 							
 						}
