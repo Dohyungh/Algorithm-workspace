@@ -7,21 +7,21 @@ import java.util.StringTokenizer;
 public class Solution {
 	
 	// 시간초과 시치
-	public static int dir(int dx, int dy, int p, int q) {
-		if (dx>p && dy>q) {
-			return 1;
-		}
-		if (dx<p && dy>q) {
-			return 2;
-		}
-		if (dx>p && dy<q) {
-			return 3;
-		}
-		if (dx<p && dy<q) {
-			return 4;
-		}
-		else return -1;
-	}
+//	public static int dir(int dx, int dy, int p, int q) {
+//		if (dx>p && dy>q) {
+//			return 1;
+//		}
+//		if (dx<p && dy>q) {
+//			return 2;
+//		}
+//		if (dx>p && dy<q) {
+//			return 3;
+//		}
+//		if (dx<p && dy<q) {
+//			return 4;
+//		}
+//		else return -1;
+//	}
 	
 	public static void main(String[] args) throws Exception {
 		//한무 대칭 시키자
@@ -60,12 +60,12 @@ public class Solution {
 					p = w;
 					q = q+xgap;
 					dx = 2*w - dx;
-					dir = dir(dx,dy,p,q);
+					dir = 2;
 				} else if (xgap > ygap) {
 					q = h;
 					p = p+ygap;
 					dy = 2*h - dy;
-					dir = dir(dx,dy,p,q);
+					dir = 3;
 				} else if (xgap == ygap) {
 					dir = 4;
 					p = w;
@@ -83,12 +83,12 @@ public class Solution {
 					p = 0;
 					q = q+xgap;
 					dx = -dx;
-					dir = dir(dx,dy,p,q);
+					dir = 1;
 				} else if (xgap > ygap) {
 					q = h;
 					p = p-ygap;
 					dy = 2*h - dy;
-					dir = dir(dx,dy,p,q);
+					dir = 4;
 				} else if (xgap == ygap) {
 					dir = 3;
 					p = 0;
@@ -104,12 +104,12 @@ public class Solution {
 					p = w;
 					q = q-xgap;
 					dx = 2*w - dx;
-					dir = dir(dx,dy,p,q);
+					dir = 4;
 				} else if (xgap > ygap) {
 					q = 0;
 					p = p+ygap;
 					dy = -dy;
-					dir = dir(dx,dy,p,q);
+					dir = 1;
 				} else if (xgap == ygap) {
 					dir = 2;
 					p = w;
@@ -126,12 +126,12 @@ public class Solution {
 					p = 0;
 					q = q-xgap;
 					dx = -dx;
-					dir = dir(dx,dy,p,q);
+					dir = 3;
 				} else if (xgap > ygap) {
 					q = 0;
 					p = p-ygap;
 					dy = -dy;
-					dir = dir(dx,dy,p,q);
+					dir = 2;
 				} else if (xgap == ygap) {
 					dir = 1;
 					p = 0;
