@@ -51,7 +51,77 @@ public class Solution {
 		
 		int xgap = 0;
 		int ygap = 0;
-
+		
+		
+		int pt = 0;
+		int big = Math.max(w, h);
+		int small = Math.min(w,h);
+		if (big%small==0) {
+			pt = big*2;
+		} else {
+			pt = big*small*2;
+		}
+		
+//		시뮬레이션 돌리면 짤 없이 시간초과
+//		int px = p;
+//		int py = q;
+//		int pt = 0;
+//		while (dir !=1 || px != p || py !=q||pt==0) {
+//		
+//			if (dir == 1) { // w h 우상
+//				px++;
+//				py++;
+//				if (px == w && py!=h) {
+//					dir = 2;
+//				} else if (py == h && px !=w) {
+//					dir = 3;
+//				} else if (px==w && py==h) {
+//					dir = 4;
+//				}
+//			}
+//			else if (dir == 2) { // 0 h 좌상
+//				px--;
+//				py++;
+//				if (px == 0 && py!=h) {
+//					dir = 1;
+//				} else if (py == h && px!=0) {
+//					dir = 4;
+//				} else if (px==0 && py==h){
+//					dir = 3;
+//				}
+//			}
+//			else if (dir == 3) { // w 0 우하
+//				px++;
+//				py--;
+//				if (px == w && py!=0) {
+//					dir = 4;
+//				} else if (py == 0 && px !=w) {
+//					dir = 1;
+//				} else if (px==w && py==0) {
+//					dir = 2;
+//				}
+//
+//			}
+//			else if (dir == 4) { // 0 0 좌하
+//				px--;
+//				py--;
+//				if (px == 0 && py!=0) {
+//					dir = 3;
+//				} else if (py == 0 && px !=0) {
+//					dir = 2;
+//				} else if(px==0 && py==0) {
+//					dir = 1;
+//				} 
+//
+//			}
+//			pt++;
+//			
+//		}
+		t = t%pt;
+//		System.out.println(pt);
+		
+		
+		
 		while (dx<0 || dx>w || dy<0 || dy>h) {
 			if (dir == 1) { // w h 우상
 				xgap = w-p;
