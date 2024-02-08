@@ -120,7 +120,8 @@ public class Solution {
 		t = t%pt;
 //		System.out.println(pt);
 		
-		
+		dx = p+t;
+		dy = q+t;
 		
 		while (dx<0 || dx>w || dy<0 || dy>h) {
 			if (dir == 1) { // w h 우상
