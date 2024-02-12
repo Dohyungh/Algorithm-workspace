@@ -95,8 +95,10 @@ public class Solution_fin {
     	Queue<Integer> queue = new LinkedList<>();
     	int pNode = start;
     	int depth = 1;
+    	
+    	// visited 배열 필요 없음!!
 
-    	boolean[] added = new boolean[adj.length]; // added 는 바로 다음 depth 에 있는 모든 Node들을 중복 없이 넣어주는 역할을 하고, 결국에는 바로 다음 cycle에 visited 될 녀석들을 의미함.
+    	boolean[] added = new boolean[adj.length]; 
     	added[start] = true; 
     	for (int j = 0; j<adj.length; j++) {
     		if (adj[pNode][j] == 1) {
@@ -107,13 +109,8 @@ public class Solution_fin {
 
     	int sz = queue.size(); 
 
-    	
-    	// added boolean 배열 추가
-    	// 같은 depth에서, (즉 접근 거리가 같은데) 여러방향(다른 출발 Node)에서 접근이 가능할 수 있음. 그러면 queue에 넣을 때는 아직 방문(visited)한 상태는 아니기에, queue 안에 똑같은게 여러번 들어갈 수 있음.
-    	
     	out:
     	while (!queue.isEmpty()) { 
-//    		System.out.println(queue);
     		
     		for (int num = 0; num<sz; num++) { 
     			
@@ -121,7 +118,7 @@ public class Solution_fin {
     			
     			for (int j = 0; j < adj.length; j++) { 
     				
-    				if (adj[pNode][j] ==1 && !added[j]) { // visited 는 역주행을 못하게 하려는 거고, // added는 중복 Node를 넣지 않으려는 것임.
+    				if (adj[pNode][j] ==1 && !added[j]) {
     					queue.add(j); 
     					added[j] = true;
     				}
