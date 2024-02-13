@@ -5,16 +5,17 @@ import java.util.Arrays;
 public class Solution {
 	public static void main(String[] args) {
 		int n = 12;
-		int[] weak = {1,5,6,10};
+		int[] weak = {0,1,5,6,10};
 		int[] dist = {1,2,3,4};
 		
 		System.out.println(solution(n,weak,dist));
 		
-		int[] weak2 = {1,3,4,9,10};
+		int[] weak2 = {0,1,3,4,9,10};
 		int[] dist2 = {3,5,7};
 		System.out.println(solution(n,weak2,dist2));
 		
 	}
+	
     public static int solution(int n, int[] weak, int[] dist) {
         int answer = 0;
         
@@ -22,27 +23,44 @@ public class Solution {
         //시계,반시계 // 시계,반시계 // ...
         int numWeaks = weak.length;
         
-        int[][] distance_matrix = new int[numWeaks][2*numWeaks];
+        int[][] CDM = new int[numWeaks][numWeaks];
+        int[][] cCDM = new int[numWeaks][numWeaks];
+        
         for (int i = 0; i < numWeaks; i++) {
-        	for (int j = 0; j < i; j++) {
-        		
-        	}
-        	
-        	for (int j = i+1; j < numWeaks; j++) {
-        		
+        	for (int j = 0; j < numWeaks; j++) {
+        		if (weak[j]-weak[i]<0) {
+        			CDM[i][j] = n+weak[j]-weak[i];
+        		} else {CDM[i][j] = weak[j]-weak[i];
+        		}
         	}
         }
         
-        if (weak[0] == 0) {
-        	
+//        for (int i = 0; i<numWeaks; i++) {
+//        	System.out.println(Arrays.toString(CDM[i]));
+//        }
+        for (int i = 0; i < numWeaks; i++) {
+        	for (int j = 0; j < numWeaks; j++) {
+        		if (weak[i]-weak[j]<0) {
+        			cCDM[i][j] = n+weak[i]-weak[j];
+        		} else {cCDM[i][j] = weak[i]-weak[j];
+        		}
+        	}
         }
-//        for (int i = 0; i < weak.length; i++) {
-//        	System.out.println(Arrays.toString(distance_matrix[i]));
-//        	
+//        
+//        for (int i = 0; i<numWeaks; i++) {
+//        	System.out.println(Arrays.toString(cCDM[i]));
 //        }
         
         
         // 도달 가능 매트릭스
+        
+        int[][] reachable = new int[numWeaks][dist.length];
+        for (int i = 0; i < numWeaks; i++) {
+        	for (int j = 0; j < dist.length; j++) {
+        		if
+        	}
+        }
+        
         
         
         
