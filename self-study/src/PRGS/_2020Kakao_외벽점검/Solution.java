@@ -54,18 +54,29 @@ public class Solution {
         
         // 도달 가능 매트릭스
         
-        int[][] reachable = new int[numWeaks][dist.length];
+        int[][][] reachable = new int[numWeaks][numWeaks][dist.length*2]; // 각 weak(i) 에서 dist(j)를 이용해 갈 수 있는 weak(k) 갈 수 있으면 1, 없으면 0.
         for (int i = 0; i < numWeaks; i++) {
-        	for (int j = 0; j < dist.length; j++) {
-        		if
+        	for (int j = 0; j < 2 * dist.length; j++) {
+        		for (int k = 0; k < numWeaks; k++) {
+        			if (CDM[i][k] <= dist[j]) reachable[i][j][k] = 1;
+        		}
+
         	}
         }
         
+        int[] allreach = new int[numWeaks];
+        
+        int workers = 0;
+        while(true) {
+        	workers++;
+        	
+        	
+        }
         
         
         
         // 탐색
         
-        return answer;
+//        return answer;
     }
 }
