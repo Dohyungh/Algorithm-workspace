@@ -61,6 +61,7 @@ public class Main {
 		
 		boolean notLine = false;
 		int cnt = 0;
+		int cnt3 = 0;
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[0].length; j++) {
 				if (map[i][j] == 2) {
@@ -71,7 +72,8 @@ public class Main {
 							cnt2++;
 						}
 					}
-					if (cnt2!=2) notLine = true;
+					if (cnt2==1) cnt3++;
+					if (cnt3>=3) notLine = true; 
 					
 				}
 			}
