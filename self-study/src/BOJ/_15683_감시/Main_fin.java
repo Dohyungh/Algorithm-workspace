@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main_fin {
-	static int numCases = 1;
+
 	static int count = 0;
 	static List<int[]> cases = new ArrayList<>();
 	public static void main(String[] args) {
-		// 최대 4^64(8x8)?
-		// 최대 4^8 = 65536 이래서 최대 cctv 개수를 줬구만?
-		
+
 		Scanner sc = new Scanner(System.in);
 		
 		int N = sc.nextInt();
@@ -20,7 +18,7 @@ public class Main_fin {
 		
 		int[][] arr = new int[N][M];
 		 
-		// cctv 개수 파악
+		// 입력받으면서 cctv 개수 파악
 		int numcctvs = 0;
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
@@ -34,7 +32,7 @@ public class Main_fin {
 		}
 		
 		// cctv 배열 생성
-		int[][] cctvs = new int[numcctvs][3]; // List가 싫어서 지난해진 입력과정
+		int[][] cctvs = new int[numcctvs][3]; // 배열 크기 때문에 numcctvs 변수를 만들었는데, 그냥 List 쓰면 됨
 		
 
 		// cctv 종류 파악
@@ -50,6 +48,7 @@ public class Main_fin {
 				}
 			}
 		}
+		// 첫번째 원소로 cctv 타입, 2, 3 번째에 좌표 입력한 2차원 배열
 		// 예시) [[1,0,0], [1,1,1], [4,1,2]]
 		
 		// 5번 cctv 선반영
@@ -64,22 +63,8 @@ public class Main_fin {
 			}
 		}
 		
-		
-		
-		int[] dirs = new int[numcctvs];
-		for (int i = 0; i < numcctvs; i++) {
-			if (cctvs[i][0] == 1 || cctvs[i][0] == 3 || cctvs[i][0] == 4) {
-				dirs[i] = 4;
-				numCases*=4;
-			}
-			if (cctvs[i][0] == 2) {
-				dirs[i] = 2;
-				numCases*=2;
-			}
-		}
-
-		
 		boolean[][] visited = new boolean[numcctvs][];
+		// ccty 타입에 따라 길이가 다른 boolean 배열로 초기화
 		for(int i = 0; i < numcctvs; i++) {
 			if (cctvs[i][0] == 1 || cctvs[i][0] == 3 || cctvs[i][0] == 4) {
 				visited[i] = new boolean[4]; 
@@ -88,12 +73,26 @@ public class Main_fin {
 				visited[i] = new boolean[2];
 			}
 		}
+		// visited 가 어떻게 생겼냐면..
+		
+		// 카메라 타입이 1,3,2,1,4 라면
+		// [[f,f,f,f],
+		// [f,f,f,f,],
+		// [f,f],
+		// [f,f,f,f],
+		// [f,f,f,f]] 로 2 만 길이가 2로 생겼음.
+		
+		
+		//가능한 경우의 수 불러오기
 		getCases(0, numcctvs, visited);
 
-		int answer = N*M;
+		int answer = N*M; // 최댓값으로 초기화
 		for (int[] aCase : cases) {
+			// aCase는 어떻게 생겼냐면..
+			// [3,0,1,0,2] 요런식으로 cctv 마다 방향을 정해줌.
 			
 			//복사 안하면 통과가 안되는데 어디서 얕은 복사 생기는지를 모르겠음ㅠㅠ
+			// 그냥 arr 넣으면 계속 중복됨.
 			int[][] temp = new int[N][];
 			for (int i = 0; i < arr.length; i++) {
 				temp[i] = Arrays.copyOf(arr[i], arr[i].length);
@@ -101,10 +100,6 @@ public class Main_fin {
 			temp = getResult(temp, aCase, cctvs);
 			if (answer > countZero(temp)) {
 				answer = Math.min(answer, countZero(temp));
-				for (int l = 0; l < temp.length; l++) {
-
-				}
-
 			}
 			
 		}
@@ -122,18 +117,20 @@ public class Main_fin {
 	// 4 이면 column이 4개
 
 	public static int countZero(int[][] arr) {
-	int N = arr.length;
-	int M = arr[0].length;
-	
-	int cnt = 0;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			if (arr[i][j]==0) cnt++;
+		int N = arr.length;
+		int M = arr[0].length;
+		
+		int cnt = 0;
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				if (arr[i][j]==0) cnt++;
+			}
 		}
-	}
-	return cnt;
+		return cnt;
 	}
 	
+	// 방향과 좌표를 주면 그 방향으로 쭉 채워주는 함수
+	// cctv 타입은 아직 고려x
 	public static int[][] fill (int[][] arr, int i, int j, int dir) {
 		int[] dr = {-1,0,1,0};
 		int[] dc = {0,-1,0,1};
@@ -156,9 +153,12 @@ public class Main_fin {
 		return arr;
 	}
 	
-
+	
 	public static void getCases(int depth, int r, boolean[][] visited) {
 		if (depth == r) {
+			// aCase 배열이 permutaion 에서 output 역할을 하고 있음.
+			// 완성된 visited 배열을 보면서 aCase 
+			// visited.length == cctv 개수
 			int[] aCase = new int[visited.length];
 			for(int i = 0; i < visited.length; i++) {
 				for (int j = 0; j < visited[i].length; j++) {
@@ -192,11 +192,13 @@ public class Main_fin {
 		return arr;
 	}
 	public static int[][] threeFill (int[][] arr, int i, int j, int dir) {
+		// 3번은 90도니까 4방향이랑 그 방향 바로 다음꺼. 마지막만 모듈러 처리해주면 됨.
 		arr = fill(arr,i,j,dir);
 		arr = fill(arr,i,j,(dir+1)%4);
 		return arr;
 	}
 	public static int[][] fourFill (int[][] arr, int i, int j, int dir) {
+		// 4번은 한방향빼고 모두니까 입력을 그 뺴는 방향 쪽으로 잡고 나머지를 감시
 		for(int k = 0; k < 4; k++) {
 			if (k!= dir) {
 				arr = fill(arr,i,j,k);
