@@ -61,6 +61,10 @@ public class Solution {
 						full[l] = hash.get(str[idx]);
 					}
 					list.add(getValue(full));
+//					int x = getValue(full);
+//					if (!list.contains(x)) {
+//						
+//					}
 				}
 			}
 			
@@ -69,6 +73,8 @@ public class Solution {
 			Collections.sort(list, (o1, o2) -> {
 				return o2-o1;
 			});
+//			System.out.printf("#%d %d%n", tc, list.get(K-1));
+
 			int now = list.get(0);
 			int cnt = 1;
 			for (int i = 0; i<list.size(); i++) {
@@ -77,6 +83,7 @@ public class Solution {
 				}
 				//뭐냐 반례..!
 				cnt++;
+				
 				now = list.get(i);
 				if (cnt == K) {
 					System.out.printf("#%d %d%n", tc, list.get(i));
