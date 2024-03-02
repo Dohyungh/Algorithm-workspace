@@ -52,8 +52,9 @@ public class Main2 {
 							int five = prefixSum[N-1][N-1] - one - two - three -four;
 							
 							int[] list = {one, two, three, four, five};
+//							System.out.println(Arrays.toString(list));
 							Arrays.sort(list);
-
+//							System.out.println("x: "+x+" y: "+y+" d1: "+d1+" d2: "+d2);
 							answer = Math.min(answer, list[4] - list[0]);
 								
 
@@ -98,7 +99,7 @@ public class Main2 {
 	public static int getThree(int x, int y, int d1, int d2, int[][] map, int[][] prefixSum) {
 		int N = map.length;
 		int sum = prefixSum[N-1][y-d1+d2-1] - prefixSum[x+d1-1][y-d1+d2-1];
-		for (int r = x+d1+d2-1, left = y-d1+d2-1; r>x+d1; r--,left--) {
+		for (int r = x+d1, left = y-d1; r<x+d1+d2; r++,left++) {			
 			for (int c = left; c <= y-d1+d2-1; c++) {
 				sum -= map[r][c];
 			}
