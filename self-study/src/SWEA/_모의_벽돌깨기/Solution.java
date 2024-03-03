@@ -10,16 +10,19 @@ public class Solution {
 	static int[][] originMap;
 	static boolean[][] bombed;
 	static List<int[]> cases;
-	
+	static int answer;
+	static int N;
+	static int W;
+	static int H;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
 		int T = sc.nextInt();
 		
 		for (int tc = 1; tc <=T ; tc++) {
-			int N = sc.nextInt();
-			int W = sc.nextInt();
-			int H = sc.nextInt();
+			N = sc.nextInt();
+			W = sc.nextInt();
+			H = sc.nextInt();
 			
 			originMap = new int[H][W];
 			
@@ -28,15 +31,20 @@ public class Solution {
 					originMap[i][j] = sc.nextInt();
 				}
 			}
+			answer = Integer.MAX_VALUE;
 			
-			cases = new ArrayList<int[]>();
-			getCases(N,W);
+
+			List<Integer> candidates = new ArrayList<Integer>();
+//			candidates.add(2);
+			for (int j = 0; j < W; j++) {
+				if (getTop(originMap, j)!=-1) {
+					candidates.add(j);
+					
+				}
+			}
 			
-			int[][] map = new int[H][W];
-			for (int i = 0; i < H; i++) map[i] = Arrays.copyOf(originMap[i], originMap[i].length);
-			
-				
-				bombed = new boolean[N][N];
+			DFS(0,originMap,candidates);
+			System.out.printf("#%d %d%n", tc, answer);
 			
 			
 			
@@ -47,40 +55,127 @@ public class Solution {
 		}
 	}
 	
-	//n 자리의 w 진수를 써야함. 비트마스킹
-	//일단 여기까지
-	private static void getCases(int n, int w) {
-		int[] aCase = new int[n];
-		for (int i = 0; i<w; i++) {
-			for (int j = 0; j<w; j++) {
-				
+	private static int countRemain(int[][] map) {
+		int cnt = 0;
+		for (int i = 0 ; i < map.length; i++) {
+			for (int j = 0; j < map[0].length; j++) {
+				if (map[i][j] !=0) cnt++;
 			}
 		}
-		
+		return cnt;
 	}
 
-	public static void bomb (int row, int col, int[][] oriMap) { // 뭐가 터지는지를 줘야 재귀를 씀
-		int N = oriMap.length;
-		int[][] map = new int[N][N];
-		for (int i = 0; i < N; i++) map[i] = Arrays.copyOf(originMap[i], N);
+	
+	public static int getTop(int[][] map, int col) {
+		for (int i = 0; i <map.length; i++) {
+			if (map[i][col] != 0) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	// 복사 남발 금지
+	public static void bomb (int row, int col, int[][] map,boolean[][] visited) { // 뭐가 터지는지를 줘야 재귀를 씀
+//		System.out.println("row :" + row);
+//		System.out.println("col :" + col);
+//		System.out.println("val :" + map[row][col]);
 		
+		
+		visited[row][col] =true;
 		int[] dr = {-1,1,0,0};
 		int[] dc = {0,0,-1,1};
 		
 		int range = map[row][col];
-		
-		for (int r =0; r < range; r++) {
-			for (int d = 0; d < 4; d++) {
-				int nr = row + dr[d]*r;
-				int nc = col + dc[d]*r;
-				
-				if (nr >=0 && nr <N && nc >=0 && nc <N) {
-					bombed[nr][nc] = true;
-					if (map[nr][nc] != 0) bomb(nr,nc,oriMap);
+		if (range ==1) {
+			bombed[row][col] = true;
+			
+			return;
+		}
+		if (range >=2 ) {
+			bombed[row][col] = true;
+			for (int r =1; r < range; r++) {
+				for (int d = 0; d < 4; d++) {
+					int nr = row + dr[d]*r;
+					int nc = col + dc[d]*r;
+					
+					if (nr >=0 && nr <H && nc >=0 && nc <W) {
+						bombed[nr][nc] = true;
+			
+						if (map[nr][nc] >= 2 && !visited[nr][nc]) bomb(nr,nc,map, visited);
+					}
+					
 				}
-				
 			}
 		}
+	}
+	
+	public static int[][] explosion (int[][] map) {
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[0].length; j++) {
+				if (bombed[i][j]) map[i][j] = 0;
+			}
+		}
+		
+		// 가라앉히고
+		out:
+		for (int j = 0; j <map[0].length; j++) {
+			label:
+			for (int i = map.length-1; i>=0; i--) {
+				if(map[i][j] == 0) {
+					for (int k = i-1; k>=0; k--) {
+						if (map[k][j] !=0) {
+							map[i][j] = map[k][j];
+							map[k][j] = 0;
+							continue label;
+						}
+					}
+					continue out;
+				}
+			}
+		}
+		return map;
+		
+	}
+	
+	public static void DFS(int depth,int[][] oriMap, List<Integer> candidates) {
+		if(candidates.isEmpty()) {
+			answer = 0;
+			return;
+		}
+		
+		if (depth == N) {
+			answer = Math.min(countRemain(oriMap), answer);
+
+//			for(int i = 0; i < H; i++) {
+//				System.out.println(Arrays.toString(oriMap[i]));
+//			}
+//			System.out.println();
+				
+
+			return;
+		}
+		
+		for (int i = 0; i < candidates.size(); i++) {
+			int[][] map = new int[H][W];
+			for (int k = 0; k < H; k++) map[k] = Arrays.copyOf(oriMap[k], W);
+			bombed = new boolean[H][W];
+			boolean[][] visited = new boolean[H][W];
+			bomb(getTop(map, candidates.get(i)), candidates.get(i), map,visited);
+			map = explosion(map);
+			
+			List<Integer> newCandidates = new ArrayList<Integer>();
+			for (int j = 0; j < W; j++) {
+				if (getTop(map, j)!=-1) {
+					newCandidates.add(j);
+					
+				}
+			}
+			
+			DFS(depth+1,map,newCandidates);
+			
+		}
+				
 	}
 
 }
