@@ -63,12 +63,6 @@ public class Solution {
 				}
 			}
 			
-//			System.out.println(Arrays.toString(queue2Coord));
-//			for (int i = 0; i < people.length; i++) {
-//				
-//				System.out.println(Arrays.toString(people[i]));
-//			}
-			
 			int[][] distMatrix = new int[2][numP]; // 0행 q1, 1행 q2
 			for (int i = 0 ; i < numP; i++) {
 				distMatrix[0][i] = getDistance(queue1Coord, people[i]);
@@ -100,9 +94,6 @@ public class Solution {
 				Collections.sort(arrival1);
 				Collections.sort(arrival2);
 				
-//				System.out.println(arrival1);
-//				System.out.println(arrival2);
-				
 				for (int k = 0; k <arrival1.size(); k++) {
 					queue1Arrival.add(arrival1.get(k));
 				}
@@ -114,24 +105,12 @@ public class Solution {
 				int q2End = getFinishTime(queue2Arrival, q2len);
 				int finishtime = Math.max(q1End, q2End);
 				
-//				System.out.println("q1End: " + q1End);
-//				System.out.println("q2End: " + q2End);
-//				System.out.println("finishtime: "+finishtime);
-//				System.out.println();
 				final_answer = Math.min(final_answer, finishtime);
 				
 			}
-			
-			
-			
-			
-			System.out.printf("#%d %d%n", tc, final_answer);
-			
 
-			
-			
-			
-			
+			System.out.printf("#%d %d%n", tc, final_answer);
+
 		}
 		
 		
@@ -147,7 +126,7 @@ public class Solution {
 	public static int getFinishTime(Queue<Integer> queueArrival, int qlen) {
 		
 		Queue<Integer> queue = new LinkedList<Integer>();
-//		System.out.println("qlen: " + qlen);
+
 		int time = 0;
 		while (true) {
 			if (queueArrival.isEmpty()) break;
@@ -159,15 +138,10 @@ public class Solution {
 				queue.add(time+qlen);
 				
 			}
-			
-			
-
 
 			time++;
 		}
-		
-//		System.out.println(queue);
-		
+	
 		int answer = 0;
 		
 		//점심 나갈거 같애

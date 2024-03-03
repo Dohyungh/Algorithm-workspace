@@ -35,23 +35,17 @@ public class Solution {
 			
 
 			List<Integer> candidates = new ArrayList<Integer>();
-//			candidates.add(2);
+
 			for (int j = 0; j < W; j++) {
 				if (getTop(originMap, j)!=-1) {
 					candidates.add(j);
 					
 				}
 			}
-			
+
 			DFS(0,originMap,candidates);
 			System.out.printf("#%d %d%n", tc, answer);
-			
-			
-			
-			
-			
-			
-			
+
 		}
 	}
 	
@@ -77,11 +71,7 @@ public class Solution {
 
 	// 복사 남발 금지
 	public static void bomb (int row, int col, int[][] map,boolean[][] visited) { // 뭐가 터지는지를 줘야 재귀를 씀
-//		System.out.println("row :" + row);
-//		System.out.println("col :" + col);
-//		System.out.println("val :" + map[row][col]);
-		
-		
+
 		visited[row][col] =true;
 		int[] dr = {-1,1,0,0};
 		int[] dc = {0,0,-1,1};
@@ -147,11 +137,6 @@ public class Solution {
 		if (depth == N) {
 			answer = Math.min(countRemain(oriMap), answer);
 
-//			for(int i = 0; i < H; i++) {
-//				System.out.println(Arrays.toString(oriMap[i]));
-//			}
-//			System.out.println();
-				
 
 			return;
 		}
