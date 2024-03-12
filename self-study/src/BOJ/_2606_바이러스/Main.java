@@ -29,7 +29,7 @@ public class Main {
 			if (link[idx1] == null) {
 				link[idx1] = new int[] {idx2};
 			} else {
-				int[] temp = new int[link[idx1].length+1]; 
+				int[] temp = new int[link[idx1].length+1];  
 				System.arraycopy(link[idx1], 0, temp, 0, link[idx1].length);
 				temp[link[idx1].length+1-1] = idx2;
 				link[idx1] = temp;
