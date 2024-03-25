@@ -13,7 +13,6 @@ public class Solution {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		
 		int T = sc.nextInt();
 		
 		for (int tc = 1; tc <= T ; tc++) {
@@ -33,10 +32,6 @@ public class Solution {
 			
 			boolean[] visited = new boolean[N];
 			getCases(N,0,0,N/2,visited);
-//			for (int i = 0 ; i< cases.size(); i++) {
-//				System.out.println(Arrays.toString(cases.get(i)));
-//				
-//			}
 			
 			for(boolean[] aCase : cases) {
 				calcAnswer(aCase,s);
@@ -67,9 +62,6 @@ public class Solution {
 				}
 			}
 		}
-//		System.out.println();
-//		System.out.println(ans1);
-//		System.out.println(ans2);
 		final_answer = Math.min(final_answer, Math.abs(ans1-ans2));
 		
 	}
@@ -78,8 +70,6 @@ public class Solution {
 		
 		if (depth ==r) {
 			boolean[] temp = Arrays.copyOf(visited, visited.length);
-//			System.out.println(Arrays.toString(temp));
-//			System.out.println(start);			
 			cases.add(temp);
 			return;
 		}

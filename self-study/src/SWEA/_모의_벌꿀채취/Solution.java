@@ -45,13 +45,7 @@ public class Solution {
 							best = 0;
 							chosen = new boolean[M];
 							getBest(k, l, 0, 1, chosen, 0);
-							int two = best;
-							
-
-//							System.out.println(one);
-//							System.out.println(two);
-
-							
+							int two = best;						
 							
 							answer = Math.max(answer, one+two);
 							
@@ -83,6 +77,7 @@ public class Solution {
 			}
 			
 		}
+		
 		
 		else {
 			for (int z = start; z <chosen.length; z++) {
