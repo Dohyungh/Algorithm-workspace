@@ -46,8 +46,7 @@ public class Solution {
             cases = new ArrayList<int[]>();
             boolean[] visit = new boolean[D];
             answer = K;
-            for (int i = K; i>=1; i--) {
-            	
+            for (int i = 1; i<=K; i++) {
             	getCases(0, i, D, visit, 0,map);
             }
              
@@ -98,6 +97,7 @@ public class Solution {
     }
      
     public static void getCases(int depth,int r,int D, boolean[] visit, int start, int[][] map) {
+    	if (depth >= answer) return;
         if (depth ==r && depth <answer) {
         	int[] indexes = new int[r];
         	int idx = 0;

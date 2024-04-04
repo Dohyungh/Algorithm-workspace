@@ -49,13 +49,10 @@ public class Solution2 {
 	}
 
 	private static void DP(int depth, int fillWith, int[] oriState, int[] oriCnt, boolean[] oriSatisfied, int ans) {
-//		System.out.println("depth:" + depth);
-//		System.out.println("fillWith:" + fillWith);
 		
 		int[] state = Arrays.copyOf(oriState, oriState.length);
 		boolean[] satisfied = Arrays.copyOf(oriSatisfied, oriSatisfied.length);
 		int[] cnt = Arrays.copyOf(oriCnt, oriCnt.length);
-//		if (depth ==3) return;
 		
 		if (answer <= ans) return;
 		if (depth >= D) return;
@@ -93,13 +90,6 @@ public class Solution2 {
 				return;
 			}
 		}
-//		System.out.println("depth:" + depth);
-//		System.out.println("fillWith:" + fillWith);
-//		System.out.println(Arrays.toString(state));
-//		System.out.println(Arrays.toString(cnt));
-//		System.out.println(Arrays.toString(satisfied));
-		
-		
 		
 		DP(depth+1, -1, state, cnt, satisfied, ans);
 		DP(depth+1, 0, state, cnt, satisfied, ans+1);
