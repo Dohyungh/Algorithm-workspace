@@ -2,7 +2,6 @@ package PRGS._2023Kakao_123떨어뜨리기;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 
@@ -11,7 +10,6 @@ public class Solution {
 	static int answer;
 	static int targetSum;
 	static int[] answerArr;
-	static boolean found;
 	public static void main(String[] args) {
 		
 		int[][] edges = {{2, 4}, {1, 2}, {6, 8}, {1, 3}, {5, 7}, {2, 5}, {3, 6}, {6, 10}, {6, 9}};
@@ -22,18 +20,16 @@ public class Solution {
 		int[] target2 = {0,7,1};
 		
 		System.out.println(Arrays.toString(solution(edges,target)));
-//		System.out.println(Arrays.toString(solution(edges1,target1)));
-//		System.out.println(Arrays.toString(solution(edges2,target2)));
+		System.out.println(Arrays.toString(solution(edges1,target1)));
+		System.out.println(Arrays.toString(solution(edges2,target2)));
 		
 	}
 	
     public static int[] solution(int[][] edges, int[] target) {
-    	answer = 8;
-    	found = false;
+    	answer = Integer.MAX_VALUE;
     	targetSum = 0;
+    	answerArr = null;
     	for (int i = 0; i < target.length; i++) targetSum += target[i];
-    	System.out.println("targetSum"+ targetSum);
-        int[] answer = {};
         
         Arrays.sort(edges, (int[] o1, int[] o2) -> {
         	if(o1[0] == o2[0]) return o1[1] - o2[1];
@@ -46,53 +42,45 @@ public class Solution {
         for (int i = 1; i < N+1; i++) nodes[i] = new Node(i);
         for (int[] edge : edges) nodes[edge[0]].add(nodes[edge[1]]);
         int[] result = new int[N];
-        int[] output = new int[30];
+        int[] output = new int[targetSum];
+        
         DP(1, result, nodes, 0, 0, target, output);
 
-        nodes = new Node[N+1];
-        for (int i = 1; i < N+1; i++) nodes[i] = new Node(i);
-        for (int[] edge : edges) nodes[edge[0]].add(nodes[edge[1]]);
-        result = new int[N];
-        output = new int[30];
         DP(2, result, nodes, 0, 0, target, output);
-        
-        
-        nodes = new Node[N+1];
-        for (int i = 1; i < N+1; i++) nodes[i] = new Node(i);
-        for (int[] edge : edges) nodes[edge[0]].add(nodes[edge[1]]);
-        result = new int[N];
-        output = new int[30];
+
         DP(3, result, nodes, 0, 0, target, output);
         
-
-        return answerArr;
+        
+        return answerArr==null? new int[] {-1} : answerArr;
     }
     
     
     
     
-    private static void DP(int i, int[] result, Node[] nodes, int numFallen, int sumFallen, int[] target, int[] output) {
-    	if (found) return;
-    	output[numFallen] = i;
+    private static void DP(int i, int[] oriResult, Node[] oriNodes, int numFallen, int sumFallen, int[] target, int[] oriOutput) {
+    	
     	sumFallen += i;
     	numFallen += 1;
+    	if (numFallen>=answer) return;
+    	if (sumFallen > targetSum) return;
+    	// 이쯤되면 복사는 그냥 무조건 시작할 때 하는게 맞아.
+    	int[] result = Arrays.copyOf(oriResult, oriResult.length);
+    	int[] output = Arrays.copyOf(oriOutput, oriOutput.length);
+    	Node[] node = new Node[oriNodes.length];
+    	for (int j = 1; j< node.length; j++) {
+    		node[j] = oriNodes[j].copy();
+    	}
+    	output[numFallen] = i;
     	
-    	Node nowNode = nodes[1];
+    	Node nowNode = node[1];
     	
-    	int id = 0;
+    	int id = 1;
     	while (nowNode != null) {
     		id = nowNode.idx;
     		nowNode = nowNode.nextNode(i);
     	}
     	result[id-1] += i;
-    	System.out.println();
-    	System.out.println("떨어진 node의 idx: " + id);
-    	System.out.println("떨어뜨린 숫자:"+ i);
-    	System.out.println("떨어뜨린개수:"+numFallen);
-    	System.out.println("떨어뜨린총합:"+sumFallen);
-    	System.out.println("result:" + Arrays.toString(result));
-    	System.out.println("target:" + Arrays.toString(target));
-    	System.out.println("output:" + Arrays.toString(output));
+    	if (result[id-1] > target[id-1]) return;
     	
     	
     	if (sumFallen == targetSum) {
@@ -100,35 +88,16 @@ public class Solution {
     			if (result[j] != target[j]) break;
     			if (j == target.length-1) {
     				answerArr = Arrays.copyOf(output, numFallen);
-    				found = true;
+    				answer = numFallen;
     			}
     		}
     		return;
     	}
     	
-    	System.out.println("갑니다");
-    	if (sumFallen > targetSum) return;
-    	System.out.println("result[id-1]: "+result[id-1]);
-    	System.out.println("target[id-1]: "+ target[id-1]);
-    	if (result[id-1] > target[id-1]) return;
+    	DP(1, result, node, numFallen, sumFallen, target, output);
+    	DP(2, result, node, numFallen, sumFallen, target, output);
+    	DP(3, result, node, numFallen, sumFallen, target, output);
     	
-    	int[] copiedResult = Arrays.copyOf(result, result.length);
-    	int[] copiedOutput = Arrays.copyOf(output, output.length);
-    	Node[] copiedNode = new Node[nodes.length];
-    	for (int j = 1; j< copiedNode.length; j++) {
-    		copiedNode[j] = nodes[j].copy();
-    	}
-    	
-    	DP(1, copiedResult, copiedNode, numFallen, sumFallen, target, copiedOutput);
-    	DP(2, copiedResult, copiedNode, numFallen, sumFallen, target, copiedOutput);
-    	DP(3, copiedResult, copiedNode, numFallen, sumFallen, target, copiedOutput);
-    	
-    	
-    	
-    	
-    	
-    	
-		
 	}
 
 
@@ -138,7 +107,6 @@ public class Solution {
     	int idx;
     	Queue<Node> childs;
     	int sum;
-    	
     	
     	Node(int idx) {
     		this.idx = idx;
@@ -166,7 +134,17 @@ public class Solution {
     	}
     	
     	public Node copy() {
-    		Node newNode = new Node(this.idx, this.childs, this.sum);
+    		Queue<Node> newChilds = new LinkedList<Node>();
+    		int sz = childs.size();
+    		
+    		for (int i = 0; i < sz; i++) {
+    			Node node = childs.poll();
+    			Node newNode = node.copy(); // 이 아름다운 재귀를 봐 정말 아름다워
+    			newChilds.add(newNode);
+    			childs.add(node);
+    		}
+    		
+    		Node newNode = new Node(this.idx, newChilds, this.sum);
     		return newNode;
     	}
     }
