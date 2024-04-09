@@ -4,16 +4,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import PRGS._2023Kakao_123떨어뜨리기.Solution2.Node;
 
 
-
-public class Solution {
+public class Solution2 {
 	static int answer;
 	static int targetSum;
 	static int[] answerArr;
-	
-	static int numFallen;
 	public static void main(String[] args) {
 		
 		int[][] edges = {{2, 4}, {1, 2}, {6, 8}, {1, 3}, {5, 7}, {2, 5}, {3, 6}, {6, 10}, {6, 9}};
@@ -25,76 +21,87 @@ public class Solution {
 		
 		System.out.println(Arrays.toString(solution(edges,target)));
 		System.out.println(Arrays.toString(solution(edges1,target1)));
-//		System.out.println(Arrays.toString(solution(edges2,target2)));
+		System.out.println(Arrays.toString(solution(edges2,target2)));
 		
 	}
 	
     public static int[] solution(int[][] edges, int[] target) {
+    	answer = Integer.MAX_VALUE;
+    	targetSum = 0;
+    	answerArr = null;
+    	for (int i = 0; i < target.length; i++) targetSum += target[i];
+        
+        Arrays.sort(edges, (int[] o1, int[] o2) -> {
+        	if(o1[0] == o2[0]) return o1[1] - o2[1];
+        	return o1[0] - o2[0];
+        });
         
         int N = edges.length+1;
         
         Node[] nodes = new Node[N+1];
         for (int i = 1; i < N+1; i++) nodes[i] = new Node(i);
         for (int[] edge : edges) nodes[edge[0]].add(nodes[edge[1]]);
+        int[] result = new int[N];
+        int[] output = new int[targetSum];
         
-        int[] result = simul(nodes,target);
-        
-        
-        
-        
+        DP(1, result, nodes, 0, 0, target, output);
+
+        DP(2, result, nodes, 0, 0, target, output);
+
+        DP(3, result, nodes, 0, 0, target, output);
         
         
         return answerArr==null ? new int[] {-1} : answerArr;
     }
     
-    // 중복 요소 ( 떨어지는 위치는 정해져 있음) 제거!!
-    public static int[] simul(Node[] nodes, int[] target) {
-    	int answer = 1;
-    	numFallen = 0;
-    	int[] result = new int[nodes.length];
-    	int idx = 0;
-    	out:
-    	while(true) {
-    		
-	    	Node nowNode = nodes[1];
-	    	
-	    	int id = 1;
-	    	while (nowNode != null) {
-	    		id = nowNode.idx;
-	    		nowNode = nowNode.nextNode(1);
-	    	}
-	    	result[idx++] = id;
-	    	for (int i = 0; i < target.length; i++) {
-	    		if (target[i] < result[i] || target[i] > 3*result[i]) break;
-	    		if (i == target.length-1) break out;
-	    	}
-	    	numFallen++;
-	    	
-    	}
-    	
-    	return result;
-    }
     
-    public static int[] getAnswer(int[] result, int[] target) {
+    
+    
+    private static void DP(int i, int[] oriResult, Node[] oriNodes, int numFallen, int sumFallen, int[] target, int[] oriOutput) {
     	
-    	int[] output = new int[target.length];
-    	int ball = 1;
-    	int idx = 1;
+    	sumFallen += i;
+    	numFallen += 1;
+    	if (numFallen>=answer) return;
+    	if (sumFallen > targetSum) return;
+    	// 이쯤되면 복사는 그냥 무조건 시작할 때 하는게 맞아.
+    	int[] result = Arrays.copyOf(oriResult, oriResult.length);
+    	int[] output = Arrays.copyOf(oriOutput, oriOutput.length);
+    	Node[] node = new Node[oriNodes.length];
+    	for (int j = 1; j< node.length; j++) {
+    		node[j] = oriNodes[j].copy();
+    	}
+    	output[numFallen] = i;
     	
-    	while(true) {
-    		
-    		output[result[idx-1]] += ball;
-    		if (target[result[idx-1]] - output[result[idx-1]] > 3*(numFallen - idx)) {
-    			//rewind
+    	Node nowNode = node[1];
+    	
+    	int id = 1;
+    	while (nowNode != null) {
+    		id = nowNode.idx;
+    		nowNode = nowNode.nextNode(i);
+    	}
+    	result[id-1] += i;
+    	if (result[id-1] > target[id-1]) return;
+    	
+    	
+    	if (sumFallen == targetSum) {
+    		for (int j = 0; j < target.length; j++) {
+    			if (result[j] != target[j]) break;
+    			if (j == target.length-1) {
+    				answerArr = Arrays.copyOf(output, numFallen);
+    				answer = numFallen;
+    			}
     		}
-    		
-    		
-    		
-    		
+    		return;
     	}
     	
-    }
-    
+    	DP(1, result, node, numFallen, sumFallen, target, output);
+    	DP(2, result, node, numFallen, sumFallen, target, output);
+    	DP(3, result, node, numFallen, sumFallen, target, output);
+    	
+	}
+
+
+
 
 	static class Node {
     	int idx;
