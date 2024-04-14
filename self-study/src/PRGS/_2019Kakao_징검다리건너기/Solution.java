@@ -10,7 +10,7 @@ public class Solution {
 		
 		int[] stones = {2, 4, 5, 3, 2, 1, 4, 2, 5, 1};
 		int k = 3;
-		System.out.println(solution(stones, 1));
+		System.out.println(solution(stones, 3));
 		
 	}
 	
@@ -29,27 +29,15 @@ public class Solution {
     	
     	int idx = 0;
     	while (idx < stones.length) {
-    		if (deque.peekFirst() < idx-k+1) deque.poll();
+    		while (!deque.isEmpty()&&deque.peekFirst() < idx-k+1) deque.pollFirst();
     		
-    		if (deque.isEmpty()) {
-    			deque.add(idx);
-    		}
-    		
-    		if (stones[idx] >= stones[deque.peekFirst()]) {
-    			deque.clear();
-    			deque.add(idx);
-    		} else {
-    			while(stones[deque.peekLast()] < stones[idx]) deque.pollLast();
-    			deque.addLast(idx);
-    		}
-    		
+    		while(!deque.isEmpty()&&stones[deque.peekLast()] < stones[idx]) deque.pollLast();
+    		deque.addLast(idx);
+
     		globalMin = Math.min(globalMin, stones[deque.peekFirst()]);
     		
     		idx++;
     	}
-    	
-    	
-    	
         return globalMin;
     }
 
