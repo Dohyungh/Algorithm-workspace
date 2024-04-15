@@ -17,8 +17,6 @@ public class Main3 {
 	static int[] distFox;
 	static boolean[] visited;
 	
-	static int[] order;
-	static int sum;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
@@ -27,8 +25,6 @@ public class Main3 {
 		
 		adj = new int[N][N];
 		
-		order = new int[N];
-		
 		for (int i = 0; i < M; i++) {
 			int from = sc.nextInt()-1;
 			int to = sc.nextInt()-1;
@@ -36,10 +32,6 @@ public class Main3 {
 			
 			adj[from][to] = d;
 			adj[to][from] = d;
-			order[to]++;
-		}
-		for (int i = 0; i < N; i++) {
-			sum += order[i];
 		}
 		// DFS + DP
 		distWolf = new int[2][N]; // 홀수번 도착 / 짝수번 도착
@@ -56,9 +48,9 @@ public class Main3 {
 		distFox[0] = 0;
 		visited = new boolean[N];
 		Dijkstra();		
-		System.out.println(Arrays.toString(distWolf[0]));
-		System.out.println(Arrays.toString(distWolf[1]));
-		System.out.println(Arrays.toString(distFox));
+//		System.out.println(Arrays.toString(distWolf[0]));
+//		System.out.println(Arrays.toString(distWolf[1]));
+//		System.out.println(Arrays.toString(distFox));
 //		
 		int answer = 0;
 		for (int i = 0; i < N; i++) {
@@ -74,18 +66,18 @@ public class Main3 {
 		// 홀수번만에 온 애 다음 애의 짝수번을 업데이트하고
 		// 짝수번만에 온 애 다음 애의 홀수번을 업데이트하는 식으로.
 		
-		int[] visitedOdd = new int[N];
-		int[] visitedEven = new int[N];
+		boolean[] visitedOdd = new boolean[N];
+		boolean[] visitedEven = new boolean[N];
 		
 //		for (int i = 1; i <= 2 * (N-1); i++) {// 로 했다가 틀림!
-		for (int i = 1; i <= sum; i++) {
+		for (int i = 1; i <= 2 * (N+1); i++) {
 			
 			int update = i % 2; // switch 가 예약어네요~
 			
 			int lookUp = 1 - update;
 			
 
-			int[] visited;
+			boolean[] visited;
 			if (update == 1) {
 				visited = visitedEven;
 				
@@ -97,14 +89,14 @@ public class Main3 {
 			int min = Integer.MAX_VALUE;
 			
 			for (int j = 0; j < N; j++) {
-				if (distWolf[lookUp][j] < min && !(visited[j] >= order[j])) {
+				if (distWolf[lookUp][j] < min && !visited[j]) {
 					minIdx = j;
 					min = distWolf[lookUp][j];
 				}
 			}
 			
 			if (minIdx == -1) continue;
-			System.out.println("minIdx : " + minIdx);
+//			System.out.println("minIdx : " + minIdx);
 			for (int j = 0; j < N; j++) {
 				if (update == 0) {
 					if (adj[minIdx][j] != 0 && distWolf[update][j] > distWolf[lookUp][minIdx] + adj[minIdx][j]*2) {
@@ -119,12 +111,12 @@ public class Main3 {
 			}
 //			System.out.println(Arrays.toString(distWolf[0]));
 //			System.out.println(Arrays.toString(distWolf[1]));
-			visited[minIdx]++;
+			visited[minIdx] = true;
 		}
 	}
 	
 	public static void Dijkstra() {
-		for (int n = 0; n < N-1; n++) {
+		for (int n = 0; n < N; n++) {
 			
 			int minIdx = -1;
 			int min = Integer.MAX_VALUE;
@@ -139,7 +131,7 @@ public class Main3 {
 			
 			for (int i = 0; i < N; i++) {
 				if (adj[minIdx][i] != 0 && !visited[i] && distFox[minIdx] + adj[minIdx][i]  < distFox[i]) {
-					distFox[i] = distFox[minIdx] + adj[minIdx][i];
+					distFox[i] = distFox[minIdx] + (int) adj[minIdx][i];
 				}
 			}
 			visited[minIdx] = true;
