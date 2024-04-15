@@ -48,9 +48,9 @@ public class Main3 {
 		distFox[0] = 0;
 		visited = new boolean[N];
 		Dijkstra();		
-//		System.out.println(Arrays.toString(distWolf[0]));
-//		System.out.println(Arrays.toString(distWolf[1]));
-//		System.out.println(Arrays.toString(distFox));
+		System.out.println(Arrays.toString(distWolf[0]));
+		System.out.println(Arrays.toString(distWolf[1]));
+		System.out.println(Arrays.toString(distFox));
 //		
 		int answer = 0;
 		for (int i = 0; i < N; i++) {
@@ -66,36 +66,29 @@ public class Main3 {
 		// 홀수번만에 온 애 다음 애의 짝수번을 업데이트하고
 		// 짝수번만에 온 애 다음 애의 홀수번을 업데이트하는 식으로.
 		
-		boolean[] visitedOdd = new boolean[N];
-		boolean[] visitedEven = new boolean[N];
+		boolean[][] visited = new boolean[2][N];
 		
 //		for (int i = 1; i <= 2 * (N-1); i++) {// 로 했다가 틀림!
 		for (int i = 1; i <= 2 * (N+1); i++) {
 			
-			int update = i % 2; // switch 가 예약어네요~
-			
-			int lookUp = 1 - update;
-			
-
-			boolean[] visited;
-			if (update == 1) {
-				visited = visitedEven;
-				
-			} else {
-				visited = visitedOdd;
-			}
-			
-			int minIdx = -1;
 			int min = Integer.MAX_VALUE;
+			int minIdx = -1;
+			int lookUp = -1;
 			
-			for (int j = 0; j < N; j++) {
-				if (distWolf[lookUp][j] < min && !visited[j]) {
-					minIdx = j;
-					min = distWolf[lookUp][j];
+			for (int n = 0; n < 2; n++) {
+				for (int j = 0; j < N; j++) {
+					if (distWolf[n][j] < min && !visited[n][j]) {
+						min = distWolf[n][j];
+						minIdx = j;
+						lookUp = n;
+					}
+					
 				}
 			}
+			if (minIdx == -1) break;
 			
-			if (minIdx == -1) continue;
+			int update = 1 - lookUp;
+			
 //			System.out.println("minIdx : " + minIdx);
 			for (int j = 0; j < N; j++) {
 				if (update == 0) {
@@ -111,7 +104,7 @@ public class Main3 {
 			}
 //			System.out.println(Arrays.toString(distWolf[0]));
 //			System.out.println(Arrays.toString(distWolf[1]));
-			visited[minIdx] = true;
+			visited[lookUp][minIdx] = true;
 		}
 	}
 	
