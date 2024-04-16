@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class Main1 {
 	// 늑대 불쌍해
 	
 	// 다익스트라 돌릴 때 *2 /2 왔다갔다 하라는 거 같은데

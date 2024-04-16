@@ -59,13 +59,11 @@ public class Main4 {
 		distFox[0] = 0;
 		visited = new boolean[N];
 		Dijkstra();		
-//		System.out.println(Arrays.toString(distWolf[0]));
-//		System.out.println(Arrays.toString(distWolf[1]));
-//		System.out.println(Arrays.toString(distFox));
-//		
+		
+		
 		int answer = 0;
 		for (int i = 0; i < N; i++) {
-			if (distFox[i] < Math.min(distWolf[0][i], distWolf[1][i]) && distFox[i] != Integer.MAX_VALUE) answer++;
+			if (distFox[i] != Integer.MAX_VALUE && distFox[i] < Math.min(distWolf[0][i], distWolf[1][i])) answer++;
 		}
 		System.out.println(answer);
 	}
@@ -97,24 +95,30 @@ public class Main4 {
 			if (distWolf[lookUp][minIdx] < nowNode[2]) continue;
 			int update = 1-lookUp;
 			
-			for (int[] nodes : adj[minIdx]) {
 				
-				distWolf[update][nodes[0]] = update == 0 ? Math.min(distWolf[update][nodes[0]], distWolf[lookUp][minIdx] + nodes[1]*2) :Math.min(distWolf[update][nodes[0]], distWolf[lookUp][minIdx] + nodes[1]/2);
-				pq.add(new int[] {update, nodes[0], distWolf[update][nodes[0]]});
+//			distWolf[update][nodes[0]] = update == 0 ? Math.min(distWolf[update][nodes[0]], distWolf[lookUp][minIdx] + nodes[1]*2) :Math.min(distWolf[update][nodes[0]], distWolf[lookUp][minIdx] + nodes[1]/2);
+//			pq.add(new int[] {update, nodes[0], distWolf[update][nodes[0]]});
 				
-//				if (update == 0) {
-//					if (!visited[update][nodes[0]] && distWolf[update][nodes[0]] > distWolf[lookUp][minIdx] + nodes[1]*2) {
-//						distWolf[update][nodes[0]] = distWolf[lookUp][minIdx] + nodes[1]*2;
-//						pq.add(new int[] {update, nodes[0], distWolf[update][nodes[0]]});
-//					}
-//				}
-//				if (update == 1) {
-//					if (!visited[update][nodes[0]] && distWolf[update][nodes[0]] > distWolf[lookUp][minIdx] + nodes[1]/2) {
-//						distWolf[update][nodes[0]] = distWolf[lookUp][minIdx] + nodes[1]/2;
-//						pq.add(new int[] {update, nodes[0], distWolf[update][nodes[0]]});
-//					}
-//				}
+			if (update == 0) {
+				for (int[] nodes : adj[minIdx]) {
+					int cost = distWolf[lookUp][minIdx] + nodes[1]*2;
+					
+					if (!visited[update][nodes[0]] && distWolf[update][nodes[0]] > cost) {
+						distWolf[update][nodes[0]] = cost;
+						pq.add(new int[] {update, nodes[0], cost});
+					}
+				}
 			}
+			if (update == 1) {
+				for (int[] nodes : adj[minIdx]) {
+					int cost = distWolf[lookUp][minIdx] + nodes[1]/2;
+					if (!visited[update][nodes[0]] && distWolf[update][nodes[0]] > cost) {
+						distWolf[update][nodes[0]] = cost;
+						pq.add(new int[] {update, nodes[0],cost});
+					}
+				}
+			}
+		
 			visited[lookUp][minIdx] = true;
 			
 			
@@ -123,32 +127,31 @@ public class Main4 {
 	}
 	
 	public static void Dijkstra() {
-		for (int n = 0; n < N; n++) {
 			
-			PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]> () {
-				
-				@Override
-				public int compare(int[] o1, int[] o2) {
-					return o1[1] - o2[1];
-				}
-				
-			});
-			pq.add(new int[] {0,0});
-			while(!pq.isEmpty()) {
-				int[] nowNode = pq.poll();
-				int minIdx = nowNode[0];
-				if (visited[minIdx]) continue;
-				if (distFox[nowNode[0]] < nowNode[1]) continue;
-				
-				for (int[] nodes : adj[minIdx]) {
-					if (!visited[nodes[0]] && distFox[minIdx] + nodes[1]  < distFox[nodes[0]]) {
-						distFox[nodes[0]] = distFox[minIdx] + nodes[1];
-						pq.add(new int[] {nodes[0], distFox[nodes[0]]});
-					}
-					
-				}
-				visited[minIdx] = true;
+		PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]> () {
+			
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				return o1[1] - o2[1];
 			}
+			
+		});
+		pq.add(new int[] {0,0});
+		while(!pq.isEmpty()) {
+			int[] nowNode = pq.poll();
+			int minIdx = nowNode[0];
+			if (visited[minIdx]) continue;
+			if (distFox[nowNode[0]] < nowNode[1]) continue;
+			
+			for (int[] nodes : adj[minIdx]) {
+				int cost = distFox[minIdx] + nodes[1];
+				if (!visited[nodes[0]] && cost < distFox[nodes[0]]) {
+					distFox[nodes[0]] = cost;
+					pq.add(new int[] {nodes[0], cost});
+				}
+				
+			}
+			visited[minIdx] = true;
 		}
 	}
 	

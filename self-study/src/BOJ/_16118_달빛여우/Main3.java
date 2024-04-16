@@ -33,7 +33,8 @@ public class Main3 {
 			adj[from][to] = d;
 			adj[to][from] = d;
 		}
-		// DFS + DP
+		
+		
 		distWolf = new int[2][N]; // 홀수번 도착 / 짝수번 도착
 		for (int i = 0; i < 2; i++) {
 			Arrays.fill(distWolf[i], Integer.MAX_VALUE);
