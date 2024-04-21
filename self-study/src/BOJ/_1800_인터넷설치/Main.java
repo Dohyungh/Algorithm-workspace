@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -30,8 +31,9 @@ public class Main {
 			if (this.pq.size() < K+1) {
 				this.pq.add(num);
 			} else {
+				this.pq.poll();
 				this.pq.add(num);
-				System.out.println(this.pq.poll());
+				System.out.println(this.pq);
 			}
 		}
 		@Override
@@ -78,7 +80,8 @@ public class Main {
 		
 		while(!nodePq.isEmpty()) {
 			Node nowNode =nodePq.poll();
-			System.out.println(nowNode.pq.peek());
+			System.out.println();
+			System.out.println("nowNode:" + nowNode);
 			
 			if (answer[nowNode.idx] < nowNode.pq.peek()) continue;
 			
@@ -87,34 +90,38 @@ public class Main {
 				
 				
 				PriorityQueue<Integer> tempPq = new PriorityQueue<>();
-				PriorityQueue<Integer> nowPq = nowNode.pq;
+				Queue<Integer> nowPq = (Queue<Integer>)nowNode.pq;
 				
 				int size = nowPq.size();
-				
+				int[] temp = new int[size];
 				for (int i = 0; i < size; i++) {
-					int n = nowPq.poll();
-					tempPq.add(n);
-					nowPq.add(n);
+					temp[i] = nowPq.poll();
+					tempPq.add(temp[i]);
 				}
+				for (int i = 0 ; i < size; i++) {
+					nowPq.add(temp[i]);
+				}
+				System.out.println("tempPq: " + tempPq);
 				
-				System.out.println(nextNode.cost);
+//				System.out.println(nextNode.cost);
 				Node newNode = new Node(nextNode.idx, tempPq);
 				
 				newNode.add(nextNode.cost);
-				System.out.println(newNode.pq);
+//				System.out.println(newNode.pq);
 				
-				answer[newNode.idx]= Math.min(answer[newNode.idx], newNode.pq.peek()); 
-				
+				if (newNode.pq.peek()!=0) {
+					answer[newNode.idx]= Math.min(answer[newNode.idx], newNode.pq.peek()); 
+				}
 				nodePq.add(newNode);
 				
-				System.out.println(newNode);
+//				System.out.println(newNode);
 			}
 			System.out.println(nodePq);
 			
 			
 			
 		}
-		System.out.println(answer[3]);
+		System.out.println(Arrays.toString(answer));
 		
 		
 		
