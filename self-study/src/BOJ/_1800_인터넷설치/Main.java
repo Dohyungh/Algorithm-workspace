@@ -4,19 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
 	static class Node implements Comparable<Node> {
 		int idx;
 		int cost;
-		PriorityQueue<Integer> pq;
 		
-		Node(int idx, PriorityQueue<Integer> pq) {
-			this.idx = idx;
-			this.pq = pq;
-		}
 		Node(int idx, int cost) {
 			this.idx = idx;
 			this.cost = cost;
@@ -24,32 +18,27 @@ public class Main {
 		
 		@Override
 		public int compareTo (Node node) {
-			return this.pq.peek() - node.pq.peek();
+			return this.cost - node.cost;
 		}
 		
-		public void add(Integer num) {
-			if (this.pq.size() < K+1) {
-				this.pq.add(num);
-			} else {
-				this.pq.poll();
-				this.pq.add(num);
-				System.out.println(this.pq);
-			}
-		}
 		@Override
 		public String toString() {
-			return "Node [idx=" + idx + ", cost=" + cost + ", pq=" + pq + "]";
+			return "Node [idx=" + idx + ", cost=" + cost + "]";
 		}
 		
 		
 	}
+	static int N;
 	static int K;
+	static int left;
+	static int right;
+	static int mid;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
 		
-		int N = sc.nextInt();
+		N = sc.nextInt();
 		int P = sc.nextInt();
 		K = sc.nextInt();
 		
@@ -57,76 +46,87 @@ public class Main {
 		
 		for (int i = 0; i < N+1; i++) adjList[i] = new ArrayList<Node>();
 		
+		right = Integer.MIN_VALUE;
 		for (int i = 0; i < P; i++) {
 			int from = sc.nextInt();
 			int to = sc.nextInt();
 			int cost = sc.nextInt();
+			right = Math.max(cost, right);
 			
 			adjList[from].add(new Node(to, cost));
 			adjList[to].add(new Node(from, cost));
 		}
 		
-		PriorityQueue<Node> nodePq = new PriorityQueue<Node>();
-		PriorityQueue<Integer> startPq = new PriorityQueue<>();
+		left = 0;
 		
-		startPq.add(0);
+		mid = (left + right) /2;
 		
-		Node start = new Node(1, startPq);
-		
-		nodePq.add(start);
-		
-		int[] answer = new int[N+1];
-		Arrays.fill(answer, Integer.MAX_VALUE);
-		
-		while(!nodePq.isEmpty()) {
-			Node nowNode =nodePq.poll();
-			System.out.println();
-			System.out.println("nowNode:" + nowNode);
+		while (left < right) {
 			
-			if (answer[nowNode.idx] < nowNode.pq.peek()) continue;
-			
-			for (Node nextNode : adjList[nowNode.idx]) {
-				System.out.println("nextNode: " + nextNode);
-				
-				
-				PriorityQueue<Integer> tempPq = new PriorityQueue<>();
-				Queue<Integer> nowPq = (Queue<Integer>)nowNode.pq;
-				
-				int size = nowPq.size();
-				int[] temp = new int[size];
-				for (int i = 0; i < size; i++) {
-					temp[i] = nowPq.poll();
-					tempPq.add(temp[i]);
-				}
-				for (int i = 0 ; i < size; i++) {
-					nowPq.add(temp[i]);
-				}
-				System.out.println("tempPq: " + tempPq);
-				
-//				System.out.println(nextNode.cost);
-				Node newNode = new Node(nextNode.idx, tempPq);
-				
-				newNode.add(nextNode.cost);
-//				System.out.println(newNode.pq);
-				
-				if (newNode.pq.peek()!=0) {
-					answer[newNode.idx]= Math.min(answer[newNode.idx], newNode.pq.peek()); 
-				}
-				nodePq.add(newNode);
-				
-//				System.out.println(newNode);
-			}
-			System.out.println(nodePq);
+			Dijkstra(adjList);
+			if (right == -1) break;
+		}
+		
+		System.out.println(right);
 			
 			
 			
 		}
-		System.out.println(Arrays.toString(answer));
+
+	private static void Dijkstra(List<Node>[] adjList) {
+//		System.out.println();
+//		System.out.println(left);
+//		System.out.println(mid);
+//		System.out.println(right);
 		
+		
+		PriorityQueue<Node> pq = new PriorityQueue<>();
+		pq.add(new Node(1,0));
+		int[] dist = new int[N+1];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		while(!pq.isEmpty()) {
+			Node nowNode = pq.poll();
+			
+			if (nowNode.cost > dist[nowNode.idx]) continue;
+			
+			for (Node nextNode : adjList[nowNode.idx]) {
+				
+				if (nextNode.cost > mid) {
+					if (nowNode.cost+1 < dist[nextNode.idx]) {
+						dist[nextNode.idx]= nowNode.cost+1; 
+						pq.add(new Node(nextNode.idx, nowNode.cost+1));
+					}
+				} else {
+					if (nowNode.cost < dist[nextNode.idx]) {
+						dist[nextNode.idx]= nowNode.cost; 
+						pq.add(new Node(nextNode.idx, nowNode.cost));
+					}
+				}
+			}
+			
+		}
+		
+		if (dist[N] == Integer.MAX_VALUE) {
+			right = -1;
+			return;
+		}
+		
+//		System.out.println(Arrays.toString(dist));
+		if (dist[N] <= K) {
+			right = mid;
+		} else {
+			left = mid+1;
+		}
+		mid = (left+right) /2;
+		
+		
+
 		
 		
 		
 		
 	}
+
+
 
 }
