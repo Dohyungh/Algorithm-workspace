@@ -31,15 +31,6 @@ public class Main {
 		}
 		
 		
-		
-//			System.out.println();
-//			
-//			System.out.println(noChooselength);
-//			System.out.println(chooseLength);
-		
-//		for (int i = 0; i <= N; i++) {
-//			System.out.println(Arrays.toString(dpTable[i]));
-//		}
 		System.out.println(Math.max(dpTable[N][0], dpTable[N][1]));
 		
 
