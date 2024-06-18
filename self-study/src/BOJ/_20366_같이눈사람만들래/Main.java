@@ -1,4 +1,4 @@
-package BOJ_20366_같이눈사람만들래;
+package BOJ._20366_같이눈사람만들래;
 
 import java.util.Arrays;
 import java.util.Scanner;
