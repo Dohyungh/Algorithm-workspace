@@ -31,24 +31,15 @@ public class Main {
 		
 		Collections.sort(coupleArr, (o1, o2) -> {return o1[2] - o2[2];});
 		
-//		for (int i = 0; i < coupleArr.size(); i++) {
-//			System.out.println(Arrays.toString(coupleArr.get(i)));			
-//		}
-		
 		int answer = Integer.MAX_VALUE;
 		
 		for (int i = 0 ; i <coupleArr.size(); i++) {
 			int[] a = coupleArr.get(i);
 			
-			int idx1 = a[0];
-			int idx2 = a[1];
-			
 			for (int j = i+1; j < coupleArr.size(); j++) {
 				int[] b = coupleArr.get(j);
-				int idx3 = b[0];
-				int idx4 = b[1];
 				
-				if (idx1 != idx3 && idx1 != idx4 && idx2 != idx3 && idx2 != idx4) {
+				if (a[0] != b[0] && a[0] != b[1] && a[1] != b[0] && a[1] != b[1]) {
 					answer = Math.min(answer, Math.abs(a[2] - b[2]));
 					break;
 				}
