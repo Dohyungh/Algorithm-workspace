@@ -37,6 +37,8 @@ public class Main {
 			for (int i = 1; i <= N; i++) {
 				if (degree[i] == 1) {
 					// 여기까지를 우선순위큐로 개선할 것임
+					// leaf 노드를 O(N)으로 찾던 것을
+					// O(logN)으로 찾을 것임
 					answer++;
 					
 					
