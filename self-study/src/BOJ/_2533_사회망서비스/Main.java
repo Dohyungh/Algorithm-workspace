@@ -33,10 +33,13 @@ public class Main {
 
 		while(true) {
 			boolean flag = true;
-
+			// 여기부터
 			for (int i = 1; i <= N; i++) {
 				if (degree[i] == 1) {
+					// 여기까지를 우선순위큐로 개선할 것임
 					answer++;
+					
+					
 					int adopt = -1;
 					for (int connectedNode : adj[i]) {
 						if (degree[connectedNode] > 0) {
@@ -44,6 +47,7 @@ public class Main {
 							break;
 						}
 					}
+					
 					degree[adopt] = 0;
 					for (int connectedNode : adj[adopt]) {
 						degree[connectedNode]--;
