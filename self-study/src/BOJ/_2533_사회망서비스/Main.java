@@ -16,7 +16,8 @@ public class Main {
 		for (int i = 1; i < N+1; i++) {
 			adj[i] = new ArrayList<Integer>();
 		}
-		
+		int[] degree = new int[N+1];
+
 		for (int i = 0; i < N-1; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int no = Integer.parseInt(st.nextToken());
@@ -24,7 +25,34 @@ public class Main {
 			
 			adj[no].add(de);
 			adj[de].add(no);
+			degree[no]++;
+			degree[de]++;
 		}
+		int answer = 0;
+
+		while(true) {
+			boolean flag = true;
+
+			for (int i = 1; i <= N; i++) {
+				if (degree[i] == 1) {
+					answer++;
+					int adopt = -1;
+					for (int connectedNode : adj[i]) {
+						if (degree[connectedNode] > 0) {
+							adopt = connectedNode;
+							break;
+						}
+					}
+					degree[adopt] = 0;
+					for (int connectedNode : adj[adopt]) {
+						degree[connectedNode]--;
+					}
+					flag = false;
+				}
+			}
+			if (flag) break;
+		}
+		System.out.println(answer);
 		
 		
 		
