@@ -79,7 +79,7 @@ class Solution {
 		int TC, MARK;
 	
 		//System.setIn(new java.io.FileInputStream("res/sample_input.txt"));
-		System.setIn(new java.io.FileInputStream("src/SWEA/_B3_섬지키기/sample_input.txt"));
+		System.setIn(new java.io.FileInputStream("./SWEA/_B3_섬지키기/sample_input.txt"));
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
