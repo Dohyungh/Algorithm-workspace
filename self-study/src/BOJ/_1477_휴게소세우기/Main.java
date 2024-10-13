@@ -22,10 +22,6 @@ public class Main {
             return o.length - this.length;
         }
 
-        @Override
-        public String toString() {
-            return "Node[ length: " + this.length + " count: " + this.count + " ] ";
-        }
     }
 
     public static void main(String[] args) {
@@ -56,33 +52,24 @@ public class Main {
         for (int i = 1; i < N; i++) {
             pq.add(new Node(arr[i] - arr[i-1], 0));
         }
-//        System.out.println(pq.poll().length);
-//0 82 201 411 555 622 755 800
-//        82 119 210 144 67 133 45
 
+        // 다 개별로 관리하니까 틀리는데 왜 틀리는 지는 모르겠음ㅠㅠ (반례를 못찾겠음)
         for (int i = 0; i < M; i++) {
             Node temp = pq.poll();
             int cnt = temp.count;
             int lengthSum = temp.length;
-//            System.out.println("temp: " + temp);
-//            System.out.println(temp.length /2 );
-//            System.out.println(temp.length - temp.length/2);
+            
             for (int j = 0; j <cnt; j++) {
                 lengthSum += pq.poll().length;
             }
-//            System.out.println("lengthSum: " + lengthSum);
+            
             for (int j = 0; j < lengthSum%(cnt+2); j++) {
                 pq.offer(new Node(lengthSum/(cnt+2) + 1, cnt+1));
-//                System.out.println("adding: " + (lengthSum/(cnt+2) + 1));
 
             }
             for (int j = 0; j <cnt + 2 - lengthSum%(cnt+2); j++) {
                 pq.offer(new Node(lengthSum/(cnt+2), cnt+1));
-//                System.out.println("adding: " + lengthSum/(cnt+2));
-
             }
-//            pq.offer(new Node(lengthSum - (lengthSum/(cnt+2)) * (cnt+1), cnt+1));
-//            System.out.println("adding rest: " + (lengthSum - (lengthSum/(cnt+2)) * (cnt+1)));
         }
         System.out.println(pq.poll().length);
 
