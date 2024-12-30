@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35617.110 d17.13
+VisualStudioVersion = 17.13.35617.110
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-1000-A+B", "boj-1000-A+B\boj-1000-A+B.vcxproj", "{A44A6609-3AFD-4C19-899A-CEFEB5A67304}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-2420-사파리월드", "boj-2420-사파리월드\boj-2420-사파리월드.vcxproj", "{5194754F-9976-4617-A4AC-6587A10EB3EE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-1110-더하기사이클", "boj-1110-더하기사이클\boj-1110-더하기사이클.vcxproj", "{7F2F4E8B-68B4-42EA-9B3B-B6E1823D4836}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-1157-단어공부", "boj-1157-단어공부\boj-1157-단어공부.vcxproj", "{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{7F2F4E8B-68B4-42EA-9B3B-B6E1823D4836}.Release|x64.Build.0 = Release|x64
 		{7F2F4E8B-68B4-42EA-9B3B-B6E1823D4836}.Release|x86.ActiveCfg = Release|Win32
 		{7F2F4E8B-68B4-42EA-9B3B-B6E1823D4836}.Release|x86.Build.0 = Release|Win32
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Debug|x64.ActiveCfg = Debug|x64
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Debug|x64.Build.0 = Debug|x64
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Debug|x86.ActiveCfg = Debug|Win32
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Debug|x86.Build.0 = Debug|Win32
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Release|x64.ActiveCfg = Release|x64
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Release|x64.Build.0 = Release|x64
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Release|x86.ActiveCfg = Release|Win32
+		{328EB63F-3A6E-47CC-A186-7D88FBEE0C2B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
