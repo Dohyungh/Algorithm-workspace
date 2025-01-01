@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-1157-단어공부", "bo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-4344-평균은넘겠지", "boj-4344-평균은넘겠지\boj-4344-평균은넘겠지.vcxproj", "{1DD77D52-7E6C-4CAF-8A7E-83970B743182}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-2869-달팽이는올라가고싶다", "boj-2869-달팽이는올라가고싶다\boj-2869-달팽이는올라가고싶다.vcxproj", "{251BB423-82E7-4490-9B65-90680330AA40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{1DD77D52-7E6C-4CAF-8A7E-83970B743182}.Release|x64.Build.0 = Release|x64
 		{1DD77D52-7E6C-4CAF-8A7E-83970B743182}.Release|x86.ActiveCfg = Release|Win32
 		{1DD77D52-7E6C-4CAF-8A7E-83970B743182}.Release|x86.Build.0 = Release|Win32
+		{251BB423-82E7-4490-9B65-90680330AA40}.Debug|x64.ActiveCfg = Debug|x64
+		{251BB423-82E7-4490-9B65-90680330AA40}.Debug|x64.Build.0 = Debug|x64
+		{251BB423-82E7-4490-9B65-90680330AA40}.Debug|x86.ActiveCfg = Debug|Win32
+		{251BB423-82E7-4490-9B65-90680330AA40}.Debug|x86.Build.0 = Debug|Win32
+		{251BB423-82E7-4490-9B65-90680330AA40}.Release|x64.ActiveCfg = Release|x64
+		{251BB423-82E7-4490-9B65-90680330AA40}.Release|x64.Build.0 = Release|x64
+		{251BB423-82E7-4490-9B65-90680330AA40}.Release|x86.ActiveCfg = Release|Win32
+		{251BB423-82E7-4490-9B65-90680330AA40}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
