@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-10989-수정렬하기3"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-2609-최대공약수와최소공배수", "boj-2609-최대공약수와최소공배수\boj-2609-최대공약수와최소공배수.vcxproj", "{498B01AD-C1CD-4FA8-9B96-812BD0589466}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-2580-스도쿠", "boj-2580-스도쿠\boj-2580-스도쿠.vcxproj", "{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -131,6 +133,14 @@ Global
 		{498B01AD-C1CD-4FA8-9B96-812BD0589466}.Release|x64.Build.0 = Release|x64
 		{498B01AD-C1CD-4FA8-9B96-812BD0589466}.Release|x86.ActiveCfg = Release|Win32
 		{498B01AD-C1CD-4FA8-9B96-812BD0589466}.Release|x86.Build.0 = Release|Win32
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Debug|x64.ActiveCfg = Debug|x64
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Debug|x64.Build.0 = Debug|x64
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Debug|x86.ActiveCfg = Debug|Win32
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Debug|x86.Build.0 = Debug|Win32
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Release|x64.ActiveCfg = Release|x64
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Release|x64.Build.0 = Release|x64
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Release|x86.ActiveCfg = Release|Win32
+		{ADDA2084-C279-4CCE-9ADC-D2DD26EE39EA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
