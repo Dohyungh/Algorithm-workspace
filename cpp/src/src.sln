@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-2580-스도쿠", "boj-2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-1197-최소스패닝트리", "boj-1197-최소스패닝트리\boj-1197-최소스패닝트리.vcxproj", "{7BD62507-BB35-4C2F-B8B9-02FBA55F2E4C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-5052-전화번호목록", "boj-5052-전화번호목록\boj-5052-전화번호목록.vcxproj", "{F52811DA-2FF2-47CF-A0C8-C11759A97854}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -151,6 +153,14 @@ Global
 		{7BD62507-BB35-4C2F-B8B9-02FBA55F2E4C}.Release|x64.Build.0 = Release|x64
 		{7BD62507-BB35-4C2F-B8B9-02FBA55F2E4C}.Release|x86.ActiveCfg = Release|Win32
 		{7BD62507-BB35-4C2F-B8B9-02FBA55F2E4C}.Release|x86.Build.0 = Release|Win32
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Debug|x64.ActiveCfg = Debug|x64
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Debug|x64.Build.0 = Debug|x64
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Debug|x86.ActiveCfg = Debug|Win32
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Debug|x86.Build.0 = Debug|Win32
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Release|x64.ActiveCfg = Release|x64
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Release|x64.Build.0 = Release|x64
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Release|x86.ActiveCfg = Release|Win32
+		{F52811DA-2FF2-47CF-A0C8-C11759A97854}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
