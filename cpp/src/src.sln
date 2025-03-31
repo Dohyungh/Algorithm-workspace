@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-7576-토마토", "boj-7
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-19583-싸이버개강총회", "boj-19583-싸이버개강총회\boj-19583-싸이버개강총회.vcxproj", "{E54A026B-EA76-47A1-B957-437705796716}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boj-2042-구간합구하기", "boj-2042-구간합구하기\boj-2042-구간합구하기.vcxproj", "{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -221,6 +223,14 @@ Global
 		{E54A026B-EA76-47A1-B957-437705796716}.Release|x64.Build.0 = Release|x64
 		{E54A026B-EA76-47A1-B957-437705796716}.Release|x86.ActiveCfg = Release|Win32
 		{E54A026B-EA76-47A1-B957-437705796716}.Release|x86.Build.0 = Release|Win32
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Debug|x64.ActiveCfg = Debug|x64
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Debug|x64.Build.0 = Debug|x64
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Debug|x86.ActiveCfg = Debug|Win32
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Debug|x86.Build.0 = Debug|Win32
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Release|x64.ActiveCfg = Release|x64
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Release|x64.Build.0 = Release|x64
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Release|x86.ActiveCfg = Release|Win32
+		{87D9D39A-50FA-44DB-AA43-18BBF657CCA7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
