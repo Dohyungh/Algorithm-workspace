@@ -22,19 +22,19 @@ public class Solution {
 			}
 			
 			
-			boolean has1; // 1이 한개든 두개든 상관없음. 1이 하나라도 있는 상태에서 2를 만나느냐가 중요함.
+			boolean has1;
 			int temp;
 			int ans = 0;
 			for (int j = 0; j < N; j++) {
 				has1 = false;
 				temp = 0;
 				for (int i = 0; i < N; i++) {
-					if (arr[i][j] == 1 && !has1) { // 1을 만났는데 기다리던게 없으면
+					if (arr[i][j] == 1 && !has1) {
 						has1 = !has1;	
-					} else if (arr[i][j] ==2 && has1) { // 2를 만났고 기다리던게 있으면
+					} else if (arr[i][j] ==2 && has1) {
 						temp++;
 						has1 = !has1;
-					} // 그 이외 경우 아무것도 안함
+					}
 				}
 				
 				ans += temp;
