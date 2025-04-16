@@ -32,18 +32,18 @@ public class Solution {
 						deque.add(arr[i][j+k]);						
 					}
 					
-					boolean ispalindrome = true;
+					boolean isPalindrome = true;
 					while (deque.size()>1) {
 						char L = deque.pollFirst();
 						char R = deque.pollLast();
 						
 						if (!(L==R)) {
-							ispalindrome = !ispalindrome;
+							isPalindrome = !isPalindrome;
 							break;
 						}
 					}
 					deque.clear();
-					if (ispalindrome) {
+					if (isPalindrome) {
 						ans++;
 					}
 					
@@ -56,18 +56,18 @@ public class Solution {
 						deque.add(arr[i+k][j]);						
 					}
 					
-					boolean ispalindrome = true;
+					boolean isPalindrome = true;
 					while (deque.size()>1) {
 						char L = deque.pollFirst();
 						char R = deque.pollLast();
 						
 						if (!(L==R)) {
-							ispalindrome = !ispalindrome;
+							isPalindrome = !isPalindrome;
 							break;
 						}
 					}
 					deque.clear();
-					if (ispalindrome) {
+					if (isPalindrome) {
 						ans++;
 					}
 					
